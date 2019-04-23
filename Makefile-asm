@@ -1,33 +1,31 @@
-CC = g++ -std=c++11
-ASM 		= as
-LD 			= ld
-#* Ассемблирование:  as -ahlsm=task1.lst --32 -gstabs+ -o task1.o task1.S
-#* Редактирование связей: ld -melf_i386 -o task1-exe-S task1.o
+ASM              := as
+LD               := ld
+
 
 
 #The Target Binary Program
-TARGET      := task5
+TARGET           := task5
 
 #The Directories, Source, Includes, Objects, Binary and Resources
-BUILDDIR    := obj
-TARGETDIR   := bin
-RESDIR      := res
-SRCEXT      := S
-DEPEXT      := d
-OBJEXT      := o
-LSTEXT 			:= lst
+BUILDDIR         := obj
+TARGETDIR        := bin
+RESDIR           := res
+SRCEXT           := S
+DEPEXT           := d
+OBJEXT           := o
+LSTEXT           := lst
 
 #Flags, Libraries and Includes
-ASMFLAGS		:= --32 -gstabs+
-LDFLAGS 		:= -melf_i386
+ASMFLAGS         := --32 -gstabs+
+LDFLAGS          := -melf_i386
 
 #------------------------------------------------------------
 #Do not touch anything below this line
 #------------------------------------------------------------
 
-SOURCES     := $(shell find . -type f -name "*.$(SRCEXT)")
-vpath %$(SRCEXT) = $(dir $(SOURCES))
-OBJECTS     := $(addprefix $(BUILDDIR)/, $(notdir $(SOURCES:.$(SRCEXT)=.$(OBJEXT))))
+SOURCES          := $(shell find . -type f -name "*.$(SRCEXT)")
+vpath %$(SRCEXT) := $(dir $(SOURCES))
+OBJECTS          := $(addprefix $(BUILDDIR)/, $(notdir $(SOURCES:.$(SRCEXT)=.$(OBJEXT))))
 
 #Defauilt Make
 all: resources $(TARGET)
